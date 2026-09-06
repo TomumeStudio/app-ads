@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tomume Studio | Mobile Apps & Games</title>
+  <title>Tomume Studio</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
     * {
       box-sizing: border-box;
@@ -14,160 +14,414 @@
       padding: 0;
     }
     body {
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      background: radial-gradient(circle at 50% 20%, #1e1b4b, #0f172a, #020617);
-      color: #f8fafc;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background-color: #0c0d0e;
+      color: #e5e5e5;
       min-height: 100vh;
       display: flex;
+      flex-direction: column;
+      justify-content: space-between;
       align-items: center;
-      justify-content: center;
-      padding: 24px;
+      padding: 32px 24px;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
     }
-    .card {
-      background: rgba(30, 41, 59, 0.7);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      border-radius: 24px;
-      padding: 40px 32px;
-      max-width: 520px;
+    .header-nav {
       width: 100%;
-      text-align: center;
-      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
-      position: relative;
-    }
-    .lang-switch {
-      position: absolute;
-      top: 20px;
-      right: 20px;
+      max-width: 900px;
       display: flex;
-      gap: 6px;
-      background: rgba(15, 23, 42, 0.6);
-      padding: 4px;
-      border-radius: 20px;
-      border: 1px solid rgba(255, 255, 255, 0.1);
+      justify-content: flex-end;
+    }
+    .lang-toggle {
+      display: flex;
+      gap: 2px;
+      background: #16181a;
+      border: 1px solid #26292b;
+      padding: 3px;
+      border-radius: 8px;
     }
     .lang-btn {
       background: none;
       border: none;
-      color: #94a3b8;
-      font-size: 12px;
+      color: #71767b;
+      font-size: 11px;
       font-weight: 600;
+      letter-spacing: 0.05em;
       padding: 4px 10px;
-      border-radius: 14px;
+      border-radius: 6px;
       cursor: pointer;
-      transition: all 0.2s ease;
+      transition: all 0.15s ease;
     }
     .lang-btn.active {
-      background: #6366f1;
-      color: #ffffff;
+      background: #26292b;
+      color: #f5f5f5;
     }
-    .logo-badge {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      width: 72px;
-      height: 72px;
-      background: linear-gradient(135deg, #6366f1, #a855f7);
-      border-radius: 20px;
-      font-size: 32px;
-      font-weight: 700;
-      color: white;
-      margin-bottom: 20px;
-      box-shadow: 0 10px 25px -5px rgba(99, 102, 241, 0.4);
+    .container {
+      text-align: center;
+      max-width: 600px;
+      width: 100%;
+      margin: auto 0;
+      animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .logo-img {
+      width: 96px;
+      height: 96px;
+      border-radius: 24px;
+      object-fit: cover;
+      margin-bottom: 24px;
+      border: 1px solid #26292b;
+      display: inline-block;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
     }
     h1 {
-      font-size: 28px;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(40px, 8vw, 60px);
       font-weight: 700;
-      letter-spacing: -0.5px;
-      margin-bottom: 12px;
-      background: linear-gradient(to right, #ffffff, #cbd5e1);
+      letter-spacing: -0.04em;
+      line-height: 1.05;
+      margin-bottom: 14px;
+      background: linear-gradient(
+        110deg,
+        #a1a1aa 0%,
+        #ffffff 35%,
+        #f4f4f5 50%,
+        #71717a 65%,
+        #a1a1aa 100%
+      );
+      background-size: 200% auto;
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
+      animation: shine 6s ease-in-out infinite;
     }
-    p.tagline {
-      font-size: 15px;
-      color: #94a3b8;
+    p.desc {
+      font-size: 16px;
+      color: #8b9095;
       line-height: 1.6;
-      margin-bottom: 28px;
-      min-height: 48px;
+      font-weight: 400;
     }
-    .divider {
-      height: 1px;
-      background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.1), transparent);
-      margin-bottom: 28px;
-    }
-    .btn {
-      display: inline-flex;
+    .email-display {
+      display: none;
+      margin: 24px auto 0;
+      padding: 10px 14px;
+      background: #141618;
+      border: 1px solid #26292b;
+      border-radius: 8px;
+      font-size: 13px;
+      color: #9ca3af;
+      max-width: 380px;
+      justify-content: space-between;
       align-items: center;
-      justify-content: center;
-      gap: 10px;
-      background: linear-gradient(135deg, #3b82f6, #6366f1);
-      color: #ffffff;
-      text-decoration: none;
-      font-weight: 600;
-      font-size: 15px;
-      padding: 13px 26px;
-      border-radius: 14px;
-      transition: all 0.2s ease;
-      box-shadow: 0 10px 20px -5px rgba(59, 130, 246, 0.4);
+      font-family: monospace;
     }
-    .btn:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 14px 25px -5px rgba(59, 130, 246, 0.5);
+    .email-display.show {
+      display: flex;
+      animation: fadeIn 0.2s ease;
+    }
+    .copy-icon-btn {
+      background: #222528;
+      border: none;
+      color: #cbd5e1;
+      font-size: 11px;
+      font-family: 'Inter', sans-serif;
+      padding: 4px 8px;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    .copy-icon-btn:hover {
+      background: #2e3236;
     }
     footer {
-      margin-top: 32px;
+      width: 100%;
+      max-width: 900px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+      padding-top: 32px;
       font-size: 12px;
-      color: #64748b;
+      color: #525860;
+    }
+    .footer-links {
+      display: flex;
+      gap: 20px;
+    }
+    .footer-link {
+      color: #71767b;
+      text-decoration: none;
+      cursor: pointer;
+      transition: color 0.15s;
+    }
+    .footer-link:hover {
+      color: #e5e5e5;
+    }
+
+    /* Modal */
+    .modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.85);
+      backdrop-filter: blur(8px);
+      z-index: 100;
+      padding: 20px;
+      align-items: center;
+      justify-content: center;
+    }
+    .modal.show {
+      display: flex;
+    }
+    .modal-box {
+      background: #121416;
+      border: 1px solid #26292b;
+      max-width: 680px;
+      width: 100%;
+      max-height: 82vh;
+      border-radius: 16px;
+      padding: 32px 28px;
+      overflow-y: auto;
+      text-align: left;
+      position: relative;
+    }
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+      border-bottom: 1px solid #222528;
+      padding-bottom: 12px;
+    }
+    .modal-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 22px;
+      font-weight: 700;
+      color: #ffffff;
+    }
+    .close-btn {
+      background: none;
+      border: none;
+      color: #71767b;
+      font-size: 26px;
+      cursor: pointer;
+      line-height: 1;
+    }
+    .close-btn:hover {
+      color: #ffffff;
+    }
+    .policy-content {
+      font-size: 13.5px;
+      line-height: 1.7;
+      color: #94a3b8;
+    }
+    .policy-content h3 {
+      font-size: 15px;
+      color: #f1f5f9;
+      margin: 18px 0 6px;
+    }
+    .policy-content ul {
+      margin: 8px 0 14px 20px;
+    }
+    .policy-content li {
+      margin-bottom: 4px;
+    }
+    .policy-content a {
+      color: #38bdf8;
+      text-decoration: none;
+    }
+    .policy-content a:hover {
+      text-decoration: underline;
+    }
+
+    @keyframes shine {
+      0% { background-position: 200% center; }
+      100% { background-position: -200% center; }
+    }
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(16px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
     }
   </style>
 </head>
 <body>
 
-  <div class="card">
-    <div class="lang-switch">
-      <button class="lang-btn active" id="btn-en" onclick="setLang('en')">EN</button>
-      <button class="lang-btn" id="btn-tr" onclick="setLang('tr')">TR</button>
+  <header class="header-nav">
+    <div class="lang-toggle">
+      <button class="lang-btn active" id="btn-en" onclick="changeLang('en')">EN</button>
+      <button class="lang-btn" id="btn-tr" onclick="changeLang('tr')">TR</button>
     </div>
+  </header>
 
-    <div class="logo-badge">T</div>
+  <main class="container">
+    <img src="logo.png" alt="Tomume Studio Logo" class="logo-img" onerror="this.style.display='none'">
+
     <h1>Tomume Studio</h1>
-    <p class="tagline" id="tagline">Crafting modern, lightweight, and engaging mobile apps & games for everyone.</p>
-    
-    <div class="divider"></div>
+    <p class="desc" id="studio-desc">
+      Mobile applications and games development.
+    </p>
 
-    <a href="mailto:muhammetappsupport@gmail.com" class="btn" id="contact-btn">
-      ✉️ Contact & Support
-    </a>
+    <div class="email-display" id="email-panel">
+      <span>muhammetappsupport@gmail.com</span>
+      <button class="copy-icon-btn" id="copy-btn" onclick="copyEmail()">Copy</button>
+    </div>
+  </main>
 
-    <footer id="footer-text">
+  <footer>
+    <div class="footer-links">
+      <span class="footer-link" onclick="openPolicy()" id="footer-policy-link">Privacy Policy</span>
+      <span>•</span>
+      <span class="footer-link" onclick="toggleEmail()" id="footer-contact-link">Contact Support</span>
+    </div>
+    <div id="footer-copy">
       © 2026 Tomume Studio. All rights reserved.
-    </footer>
+    </div>
+  </footer>
+
+  <!-- Privacy Policy Modal -->
+  <div class="modal" id="policyModal" onclick="closePolicyOnBackdrop(event)">
+    <div class="modal-box">
+      <div class="modal-header">
+        <div class="modal-title" id="policy-title">Privacy Policy</div>
+        <button class="close-btn" onclick="closePolicy()">&times;</button>
+      </div>
+      <div class="policy-content" id="policy-body"></div>
+    </div>
   </div>
 
   <script>
-    const content = {
+    let currentLang = 'en';
+
+    const langData = {
       en: {
-        tagline: "Crafting modern, lightweight, and engaging mobile apps & games for everyone.",
-        contact: "✉️ Contact & Support",
-        footer: "© 2026 Tomume Studio. All rights reserved."
+        desc: "Mobile applications and games development.",
+        footerPolicy: "Privacy Policy",
+        footerSupport: "Contact Support",
+        copied: "Copied!",
+        copy: "Copy",
+        footerCopy: "© 2026 Tomume Studio. All rights reserved.",
+        policyTitle: "Privacy Policy",
+        policyText: `
+          <p><strong>Effective Date:</strong> September 2026</p>
+          <p>Tomume Studio, operated by independent developer <strong>Muhammet Melih Çalış</strong>, develops and publishes mobile applications and games on the Google Play Store.</p>
+
+          <h3>1. Information Collection and Storage</h3>
+          <p>We do not collect or store personal identity records (such as real names, private phone numbers, physical addresses, or passwords) on private servers.</p>
+
+          <h3>2. Third-Party Services & Ad Networks</h3>
+          <p>Our applications utilize standard third-party partner SDKs to deliver advertisements and analyze app performance. These services may process anonymous device identifiers (such as Google Advertising ID):</p>
+          <ul>
+            <li><a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Google Play Services</a></li>
+            <li><a href="https://support.google.com/admob/answer/6128543" target="_blank" rel="noopener">Google AdMob</a></li>
+          </ul>
+
+          <h3>3. Diagnostics & Crash Logs</h3>
+          <p>When an unexpected app crash occurs, anonymous technical telemetry (device model, operating system version) is logged to diagnose and deploy stability patches.</p>
+
+          <h3>4. Children's Privacy</h3>
+          <p>Our apps comply with Google Play Families Policies and do not deliberately collect personal information from children under 13 years old.</p>
+
+          <h3>5. Contact & Support</h3>
+          <p>For any questions or privacy inquiries, contact the developer directly at: <br>
+          <strong>muhammetappsupport@gmail.com</strong></p>
+        `
       },
       tr: {
-        tagline: "Kullanıcı dostu, modern ve eğlenceli mobil uygulamalar ve oyunlar geliştiriyoruz.",
-        contact: "✉️ Destek & İletişim",
-        footer: "© 2026 Tomume Studio. Tüm hakları saklıdır."
+        desc: "Mobil uygulama ve oyun geliştirme stüdyosu.",
+        footerPolicy: "Gizlilik Politikası",
+        footerSupport: "İletişim & Destek",
+        copied: "Kopyalandı!",
+        copy: "Kopyala",
+        footerCopy: "© 2026 Tomume Studio. Tüm hakları saklıdır.",
+        policyTitle: "Gizlilik Politikası",
+        policyText: `
+          <p><strong>Yürürlük Tarihi:</strong> Eylül 2026</p>
+          <p>Bağımsız geliştirici <strong>Muhammet Melih Çalış</strong> tarafından yönetilen Tomume Studio, Google Play Store üzerinde mobil uygulama ve oyunlar geliştirir.</p>
+
+          <h3>1. Bilgi Toplama ve Depolama</h3>
+          <p>Kullanıcıların ad, telefon numarası veya parola gibi kişisel kimlik verileri stüdyomuza ait sunucularda toplanmaz ve saklanmaz.</p>
+
+          <h3>2. Üçüncü Taraf Servisler ve Reklam Ağları</h3>
+          <p>Uygulamalarımız reklam sunumu ve performans analitiği amacıyla üçüncü taraf güvenilir SDK'lar kullanır. Bu ağlar yalnızca anonim reklam kimliğini (Google Advertising ID) işleyebilir:</p>
+          <ul>
+            <li><a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Google Play Hizmetleri</a></li>
+            <li><a href="https://support.google.com/admob/answer/6128543" target="_blank" rel="noopener">Google AdMob</a></li>
+          </ul>
+
+          <h3>3. Hata Kayıtları (Crash Logs)</h3>
+          <p>Uygulama çökmesi durumunda hatayı hızlıca onarabilmek için anonim teknik veriler (cihaz modeli, Android versiyonu) otomatik olarak raporlanabilir.</p>
+
+          <h3>4. Çocukların Gizliliği</h3>
+          <p>Uygulamalarımız Google Play Aile Politikaları standartlarını benimser ve 13 yaş altı çocuklardan bilerek kişisel bilgi toplamaz.</p>
+
+          <h3>5. İletişim</h3>
+          <p>Gizlilik süreçleri veya teknik destek ile ilgili her konuda doğrudan geliştiriciye ulaşabilirsiniz: <br>
+          <strong>muhammetappsupport@gmail.com</strong></p>
+        `
       }
     };
 
-    function setLang(lang) {
-      document.getElementById('tagline').textContent = content[lang].tagline;
-      document.getElementById('contact-btn').textContent = content[lang].contact;
-      document.getElementById('footer-text').textContent = content[lang].footer;
+    function toggleEmail() {
+      const panel = document.getElementById('email-panel');
+      panel.classList.toggle('show');
+      if (panel.classList.contains('show')) {
+        panel.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+
+    function copyEmail() {
+      navigator.clipboard.writeText('muhammetappsupport@gmail.com');
+      const btn = document.getElementById('copy-btn');
+      btn.textContent = langData[currentLang].copied;
+      setTimeout(() => {
+        btn.textContent = langData[currentLang].copy;
+      }, 2000);
+    }
+
+    function openPolicy() {
+      document.getElementById('policyModal').classList.add('show');
+    }
+
+    function closePolicy() {
+      document.getElementById('policyModal').classList.remove('show');
+      if (window.location.hash === '#privacy') {
+        history.replaceState(null, null, ' ');
+      }
+    }
+
+    function closePolicyOnBackdrop(e) {
+      if (e.target.id === 'policyModal') {
+        closePolicy();
+      }
+    }
+
+    function changeLang(lang) {
+      currentLang = lang;
+      document.getElementById('studio-desc').textContent = langData[lang].desc;
+      document.getElementById('footer-policy-link').textContent = langData[lang].footerPolicy;
+      document.getElementById('footer-contact-link').textContent = langData[lang].footerSupport;
+      document.getElementById('copy-btn').textContent = langData[lang].copy;
+      document.getElementById('footer-copy').textContent = langData[lang].footerCopy;
+      
+      document.getElementById('policy-title').textContent = langData[lang].policyTitle;
+      document.getElementById('policy-body').innerHTML = langData[lang].policyText;
       
       document.getElementById('btn-en').classList.toggle('active', lang === 'en');
       document.getElementById('btn-tr').classList.toggle('active', lang === 'tr');
     }
+
+    if (window.location.hash === '#privacy') {
+      openPolicy();
+    }
+
+    changeLang('en');
   </script>
 
 </body>
