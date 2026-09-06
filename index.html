@@ -25,20 +25,25 @@
       padding: 32px 24px;
       -webkit-font-smoothing: antialiased;
       overflow-x: hidden;
+      position: relative;
     }
+
+    /* Dil Seçici - Sağ Üst Köşe */
     .header-nav {
-      width: 100%;
-      max-width: 900px;
-      display: flex;
-      justify-content: flex-end;
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      z-index: 50;
     }
     .lang-toggle {
       display: flex;
       gap: 2px;
-      background: #16181a;
+      background: rgba(22, 24, 26, 0.85);
+      backdrop-filter: blur(8px);
       border: 1px solid #26292b;
       padding: 3px;
       border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
     }
     .lang-btn {
       background: none;
@@ -47,7 +52,7 @@
       font-size: 11px;
       font-weight: 600;
       letter-spacing: 0.05em;
-      padding: 4px 10px;
+      padding: 5px 11px;
       border-radius: 6px;
       cursor: pointer;
       transition: all 0.15s ease;
@@ -56,9 +61,13 @@
       background: #26292b;
       color: #f5f5f5;
     }
+    .lang-btn:hover:not(.active) {
+      color: #cbd5e1;
+    }
+
     .container {
       text-align: center;
-      max-width: 600px;
+      max-width: 650px;
       width: 100%;
       margin: auto 0;
       animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1);
@@ -73,13 +82,15 @@
       display: inline-block;
       box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
     }
+
+    /* Vurgulanan Büyük Başlık */
     h1 {
       font-family: 'Space Grotesk', sans-serif;
-      font-size: clamp(40px, 8vw, 60px);
+      font-size: clamp(48px, 10vw, 76px);
       font-weight: 700;
       letter-spacing: -0.04em;
       line-height: 1.05;
-      margin-bottom: 14px;
+      margin-bottom: 16px;
       background: linear-gradient(
         110deg,
         #a1a1aa 0%,
@@ -94,65 +105,79 @@
       animation: shine 6s ease-in-out infinite;
     }
     p.desc {
-      font-size: 16px;
+      font-size: 17px;
       color: #8b9095;
       line-height: 1.6;
       font-weight: 400;
     }
-    .email-display {
-      display: none;
-      margin: 24px auto 0;
-      padding: 10px 14px;
-      background: #141618;
-      border: 1px solid #26292b;
-      border-radius: 8px;
-      font-size: 13px;
-      color: #9ca3af;
-      max-width: 380px;
-      justify-content: space-between;
-      align-items: center;
-      font-family: monospace;
-    }
-    .email-display.show {
-      display: flex;
-      animation: fadeIn 0.2s ease;
-    }
-    .copy-icon-btn {
-      background: #222528;
-      border: none;
-      color: #cbd5e1;
-      font-size: 11px;
-      font-family: 'Inter', sans-serif;
-      padding: 4px 8px;
-      border-radius: 4px;
-      cursor: pointer;
-    }
-    .copy-icon-btn:hover {
-      background: #2e3236;
-    }
+
     footer {
       width: 100%;
       max-width: 900px;
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 12px;
+      gap: 16px;
       padding-top: 32px;
       font-size: 12px;
       color: #525860;
     }
-    .footer-links {
+    .social-links {
       display: flex;
       gap: 20px;
+      align-items: center;
     }
+    .social-link {
+      color: #8b9095;
+      text-decoration: none;
+      transition: color 0.15s, transform 0.15s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .social-link:hover {
+      color: #ffffff;
+      transform: translateY(-2px);
+    }
+    .social-link svg {
+      width: 20px;
+      height: 20px;
+      fill: currentColor;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+    }
+
+    /* Beyaz Yazı & Üzerine Gelince Siyah Yazı + Beyaz Kapsül */
     .footer-link {
-      color: #71767b;
+      color: #ffffff;
       text-decoration: none;
       cursor: pointer;
-      transition: color 0.15s;
+      padding: 6px 14px;
+      border-radius: 8px;
+      font-weight: 500;
+      font-size: 13px;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
     }
     .footer-link:hover {
-      color: #e5e5e5;
+      background-color: #ffffff;
+      color: #0c0d0e;
+      box-shadow: 0 4px 14px rgba(255, 255, 255, 0.15);
+      transform: translateY(-1px);
+    }
+
+    .footer-sep {
+      color: #383d42;
+      font-size: 11px;
+    }
+
+    #footer-copy {
+      margin-top: 4px;
     }
 
     /* Modal */
@@ -207,28 +232,82 @@
     .close-btn:hover {
       color: #ffffff;
     }
-    .policy-content {
-      font-size: 13.5px;
-      line-height: 1.7;
+    .modal-content-body {
+      font-size: 14px;
+      line-height: 1.75;
       color: #94a3b8;
     }
-    .policy-content h3 {
+    .modal-content-body p {
+      margin-bottom: 14px;
+    }
+    .modal-content-body h3 {
       font-size: 15px;
       color: #f1f5f9;
-      margin: 18px 0 6px;
+      margin: 20px 0 8px;
     }
-    .policy-content ul {
+    .modal-content-body ul {
       margin: 8px 0 14px 20px;
     }
-    .policy-content li {
+    .modal-content-body li {
       margin-bottom: 4px;
     }
-    .policy-content a {
+    .modal-content-body a {
       color: #38bdf8;
       text-decoration: none;
     }
-    .policy-content a:hover {
+    .modal-content-body a:hover {
       text-decoration: underline;
+    }
+
+    /* Modal İçi İletişim Kartı Tasarımı */
+    .contact-card {
+      background: #181a1d;
+      border: 1px solid #282b2f;
+      border-radius: 12px;
+      padding: 18px 20px;
+      margin: 16px 0 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+    .contact-email-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #0f1012;
+      border: 1px solid #222528;
+      border-radius: 8px;
+      padding: 10px 14px;
+      font-family: monospace;
+      font-size: 13.5px;
+      color: #e2e8f0;
+      gap: 10px;
+      word-break: break-all;
+    }
+    .contact-actions {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .btn-contact-action {
+      background: #222528;
+      border: 1px solid #2f343a;
+      color: #f1f5f9;
+      padding: 8px 14px;
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 500;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.15s ease;
+    }
+    .btn-contact-action:hover {
+      background: #ffffff;
+      color: #0c0d0e;
+      border-color: #ffffff;
     }
 
     @keyframes shine {
@@ -253,6 +332,7 @@
 </head>
 <body>
 
+  <!-- Sağ Üst Köşe Dil Seçimi -->
   <header class="header-nav">
     <div class="lang-toggle">
       <button class="lang-btn active" id="btn-en" onclick="changeLang('en')">EN</button>
@@ -267,46 +347,64 @@
     <p class="desc" id="studio-desc">
       Mobile applications and games development.
     </p>
-
-    <div class="email-display" id="email-panel">
-      <span>muhammetappsupport@gmail.com</span>
-      <button class="copy-icon-btn" id="copy-btn" onclick="copyEmail()">Copy</button>
-    </div>
   </main>
 
   <footer>
+    <div class="social-links">
+      <!-- Instagram -->
+      <a href="https://www.instagram.com/tomumestudio" target="_blank" rel="noopener" class="social-link" title="Instagram">
+        <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+      </a>
+      <!-- X (Twitter) -->
+      <a href="https://x.com/tomumestudio" target="_blank" rel="noopener" class="social-link" title="X (Twitter)">
+        <svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+      </a>
+    </div>
+
     <div class="footer-links">
-      <span class="footer-link" onclick="openPolicy()" id="footer-policy-link">Privacy Policy</span>
-      <span>•</span>
-      <span class="footer-link" onclick="toggleEmail()" id="footer-contact-link">Contact Support</span>
+      <span class="footer-link" onclick="openModal('about')" id="footer-about-link">About Us</span>
+      <span class="footer-sep">•</span>
+      <span class="footer-link" onclick="openModal('policy')" id="footer-policy-link">Privacy Policy</span>
+      <span class="footer-sep">•</span>
+      <span class="footer-link" onclick="openModal('contact')" id="footer-contact-link">Contact Support</span>
     </div>
     <div id="footer-copy">
       © 2026 Tomume Studio. All rights reserved.
     </div>
   </footer>
 
-  <!-- Privacy Policy Modal -->
-  <div class="modal" id="policyModal" onclick="closePolicyOnBackdrop(event)">
+  <!-- Ortak Modal Penceresi -->
+  <div class="modal" id="infoModal" onclick="closeModalOnBackdrop(event)">
     <div class="modal-box">
       <div class="modal-header">
-        <div class="modal-title" id="policy-title">Privacy Policy</div>
-        <button class="close-btn" onclick="closePolicy()">&times;</button>
+        <div class="modal-title" id="modal-title"></div>
+        <button class="close-btn" onclick="closeModal()">&times;</button>
       </div>
-      <div class="policy-content" id="policy-body"></div>
+      <div class="modal-content-body" id="modal-body"></div>
     </div>
   </div>
 
   <script>
     let currentLang = 'en';
+    let currentModalType = null;
 
     const langData = {
       en: {
         desc: "Mobile applications and games development.",
+        footerAbout: "About Us",
         footerPolicy: "Privacy Policy",
         footerSupport: "Contact Support",
         copied: "Copied!",
-        copy: "Copy",
+        copy: "Copy Address",
+        sendEmail: "Send Email",
         footerCopy: "© 2026 Tomume Studio. All rights reserved.",
+        aboutTitle: "About Us",
+        aboutText: `
+          <p><strong>Welcome to Tomume Studio</strong></p>
+          <p>We are dedicated to crafting innovative, modern, and intuitive mobile applications and games with a strong focus on user experience.</p>
+          <p>Our goal is to bring together practical functionality that simplifies everyday tasks with clean, accessible interface designs. As a studio committed to continuous growth, your thoughts, feedback, and reviews are invaluable to us.</p>
+          <p>Feel free to reach out to us via our social media channels or our support email at any time.</p>
+        `,
         policyTitle: "Privacy Policy",
         policyText: `
           <p><strong>Effective Date:</strong> September 2026</p>
@@ -331,15 +429,42 @@
           <h3>5. Contact & Support</h3>
           <p>For any questions or privacy inquiries, contact the developer directly at: <br>
           <strong>muhammetappsupport@gmail.com</strong></p>
+        `,
+        contactTitle: "Contact & Support",
+        contactText: `
+          <p>Have questions, suggestions, or need technical assistance with any of our apps? We are here to help!</p>
+          
+          <div class="contact-card">
+            <div class="contact-email-row">
+              <span>muhammetappsupport@gmail.com</span>
+            </div>
+            <div class="contact-actions">
+              <button class="btn-contact-action" id="modal-copy-btn" onclick="copyEmail()">Copy Address</button>
+              <a href="mailto:muhammetappsupport@gmail.com" class="btn-contact-action">Send Email ↗</a>
+            </div>
+          </div>
+
+          <p style="font-size: 12.5px; color: #64748b;">
+            We usually respond to feedback, bug reports, and partnership inquiries within 24–48 business hours.
+          </p>
         `
       },
       tr: {
         desc: "Mobil uygulama ve oyun geliştirme stüdyosu.",
+        footerAbout: "Hakkımızda",
         footerPolicy: "Gizlilik Politikası",
         footerSupport: "İletişim & Destek",
         copied: "Kopyalandı!",
-        copy: "Kopyala",
+        copy: "Adresi Kopyala",
+        sendEmail: "E-posta Gönder",
         footerCopy: "© 2026 Tomume Studio. Tüm hakları saklıdır.",
+        aboutTitle: "Hakkımızda",
+        aboutText: `
+          <p><strong>Tomume Studio'ya Hoş Geldiniz</strong></p>
+          <p>Kullanıcı deneyimini odağımıza alarak; yenilikçi, modern ve sade mobil uygulamalar ile eğlenceli oyunlar geliştirmek için çalışıyoruz.</p>
+          <p>Projelerimizde, günlük hayatı kolaylaştıran işlevsel özellikleri kullanıcı dostu arayüzlerle buluşturmayı amaçlıyoruz. Sürekli gelişime inanan bir stüdyo olarak, sizlerden gelecek her türlü geri bildirim, öneri ve değerlendirme bizim için son derece değerlidir.</p>
+          <p>Bizimle sosyal medya hesaplarımız veya destek e-posta adresimiz üzerinden dilediğiniz zaman iletişime geçebilirsiniz.</p>
+        `,
         policyTitle: "Gizlilik Politikası",
         policyText: `
           <p><strong>Yürürlük Tarihi:</strong> Eylül 2026</p>
@@ -364,61 +489,90 @@
           <h3>5. İletişim</h3>
           <p>Gizlilik süreçleri veya teknik destek ile ilgili her konuda doğrudan geliştiriciye ulaşabilirsiniz: <br>
           <strong>muhammetappsupport@gmail.com</strong></p>
+        `,
+        contactTitle: "İletişim & Destek",
+        contactText: `
+          <p>Uygulamalarımız hakkında bir sorunuz, öneriniz veya teknik desteğe ihtiyacınız mı var? Yardımcı olmaktan mutluluk duyarız!</p>
+          
+          <div class="contact-card">
+            <div class="contact-email-row">
+              <span>muhammetappsupport@gmail.com</span>
+            </div>
+            <div class="contact-actions">
+              <button class="btn-contact-action" id="modal-copy-btn" onclick="copyEmail()">Adresi Kopyala</button>
+              <a href="mailto:muhammetappsupport@gmail.com" class="btn-contact-action">E-posta Gönder ↗</a>
+            </div>
+          </div>
+
+          <p style="font-size: 12.5px; color: #64748b;">
+            Geri bildirimlere, hata bildirimlerine ve iş birliği taleplerine genellikle 24–48 iş saati içerisinde dönüş yapılmaktadır.
+          </p>
         `
       }
     };
 
-    function toggleEmail() {
-      const panel = document.getElementById('email-panel');
-      panel.classList.toggle('show');
-      if (panel.classList.contains('show')) {
-        panel.scrollIntoView({ behavior: 'smooth' });
+    function copyEmail() {
+      navigator.clipboard.writeText('muhammetappsupport@gmail.com');
+      const btn = document.getElementById('modal-copy-btn');
+      if (btn) {
+        btn.textContent = langData[currentLang].copied;
+        setTimeout(() => {
+          btn.textContent = langData[currentLang].copy;
+        }, 2000);
       }
     }
 
-    function copyEmail() {
-      navigator.clipboard.writeText('muhammetappsupport@gmail.com');
-      const btn = document.getElementById('copy-btn');
-      btn.textContent = langData[currentLang].copied;
-      setTimeout(() => {
-        btn.textContent = langData[currentLang].copy;
-      }, 2000);
+    function openModal(type) {
+      currentModalType = type;
+      const titleEl = document.getElementById('modal-title');
+      const bodyEl = document.getElementById('modal-body');
+
+      if (type === 'about') {
+        titleEl.textContent = langData[currentLang].aboutTitle;
+        bodyEl.innerHTML = langData[currentLang].aboutText;
+      } else if (type === 'policy') {
+        titleEl.textContent = langData[currentLang].policyTitle;
+        bodyEl.innerHTML = langData[currentLang].policyText;
+      } else if (type === 'contact') {
+        titleEl.textContent = langData[currentLang].contactTitle;
+        bodyEl.innerHTML = langData[currentLang].contactText;
+      }
+
+      document.getElementById('infoModal').classList.add('show');
     }
 
-    function openPolicy() {
-      document.getElementById('policyModal').classList.add('show');
-    }
-
-    function closePolicy() {
-      document.getElementById('policyModal').classList.remove('show');
+    function closeModal() {
+      document.getElementById('infoModal').classList.remove('show');
+      currentModalType = null;
       if (window.location.hash === '#privacy') {
         history.replaceState(null, null, ' ');
       }
     }
 
-    function closePolicyOnBackdrop(e) {
-      if (e.target.id === 'policyModal') {
-        closePolicy();
+    function closeModalOnBackdrop(e) {
+      if (e.target.id === 'infoModal') {
+        closeModal();
       }
     }
 
     function changeLang(lang) {
       currentLang = lang;
       document.getElementById('studio-desc').textContent = langData[lang].desc;
+      document.getElementById('footer-about-link').textContent = langData[lang].footerAbout;
       document.getElementById('footer-policy-link').textContent = langData[lang].footerPolicy;
       document.getElementById('footer-contact-link').textContent = langData[lang].footerSupport;
-      document.getElementById('copy-btn').textContent = langData[lang].copy;
       document.getElementById('footer-copy').textContent = langData[lang].footerCopy;
-      
-      document.getElementById('policy-title').textContent = langData[lang].policyTitle;
-      document.getElementById('policy-body').innerHTML = langData[lang].policyText;
-      
+
+      if (currentModalType) {
+        openModal(currentModalType);
+      }
+
       document.getElementById('btn-en').classList.toggle('active', lang === 'en');
       document.getElementById('btn-tr').classList.toggle('active', lang === 'tr');
     }
 
     if (window.location.hash === '#privacy') {
-      openPolicy();
+      openModal('policy');
     }
 
     changeLang('en');
